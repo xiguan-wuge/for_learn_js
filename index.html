@@ -4,57 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>懒加载图片</title>
+  <title>高阶函数</title>
 </head>
 <body>
-  <!-- 网页在渲染的时候 http的请求数量,
-  chrome是性能最好的，同时并发请求数十几个
-  将图片下载了 放到dom ready 事件之后将有效提高网页打开速度
-  占位图片,
-  优化前：n 张图片， URL不一样，http请求数是n
-  优化后：  图片上的http 数量是1 
-  如果URL一致，不会重复发送 -->
-
-  <img class="pic1"
-    src="http://static.youku.com/yk/vmanage/img/manage/video/mask.d53611efc6.png"
-    origin_src="http://tc.sinaimg.cn/maxwidth.800/tc.service.weibo.com/p1_pstatp_com/e1112078c33a8819f83d5560fafddcde.jpg" alt="">
-  <img class="pic1"
-    src="http://static.youku.com/yk/vmanage/img/manage/video/mask.d53611efc6.png" 
-    origin_src="http://d01.res.meilishuo.net/pic/_o/d5/50/82fbe28b3d706ac2c2f537dbc8a8_462_422.c6.jpeg"
-    alt="">
-  <img class="pic1"
-    src="http://static.youku.com/yk/vmanage/img/manage/video/mask.d53611efc6.png" 
-    origin_src="http://imgsrc.baidu.com/forum/w%3D580/sign=4e0639600855b3199cf9827d73a88286/6e061d950a7b02089a314a8060d9f2d3562cc8d3.jpg"
-    alt="">
-    <script src="./lazyload.js"></script>
-  <script>
-    // 已经是用户看到了网页了，dom ready 
-    window.onload=function(){
-      const img=document.querySelector('.pic1');
-      // 懒加载图片
-      LazyLoadImage.setSrc(img);
-      
-
-
-
-      // 在页面打开后 重新下载图片
-      // const img=document.querySelector('.pic1');
-      // // origin_src 自定义属性
-      // const url=img.getAttribute('origin_src');
-      // console.log(url);
-      // img.src=url;
-      // // img.setAttribute('src',url);
-      // const oImg=document.createElement('img');
-      // oImg.style.display='none';
-      // document.body.appendChild(oImg);
-      // oImg.onload=function(){
-      //   // 幕后工作者 已经下载了图片
-      //   // URL 一旦下载 在浏览器缓存
-      //   img.src=url;
-      // }
-      // // 图片的下载是异步的 图片有大小
-      // oImg.src=url; 
-    }
-  </script>
+  js 编程 函数式编程是现在最当红的当级编程风格。
+  
 </body>
 </html>
