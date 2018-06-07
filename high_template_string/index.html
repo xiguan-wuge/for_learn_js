@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+  // 字符串模板 深层？ js 数据与html灵与肉的结合。
+  // 嵌套
+  // 字符串模板 toString 
+  // let arr=[{value:1},{value:2}];
+  // let message=`
+  //   <ul>
+  //     ${arr.map((item)=>{
+  //       return `
+  //         <li>${item.value}</li>
+  //       `
+  //     }).join('')}
+  //   </ul>
+  // `
+  // // .join吧数组变成字符串
+  // console.log(message);
+  // 欢迎模板
+ // 多行变单行
+ let x='Daisy',y='Kevin';
+//  标签模板
+  let message=oneline`
+    Hi,
+    ${x},
+    I am 
+    ${y}.
+  `;
+  function oneline(template,...expressions){
+    // es6 数组的函数式函数 map 新生成一个数组
+    // reduce 将数组减员 遍历数组的每一项，将每一项跟之前一项进行一个什么操作
+    // （函数）数组只有一项 经常用于将一个数组和 
+    let result=template.reduce((prev,next,i)=>{
+      
+      let expression=expressions[i-1];
+      console.log(prev,next,i,expression);
+      return prev+expression+next;
+    });
+    // 多行字符串，如何去除空格，删除换行？
+    // 找到换行空格，替成空
+    console.log(result);
+    // 行首的所有空格
+    result =result.replace(/(\n\s*)/g," ");
+    result=result.trim();
+    // console.log(template);
+    // console.log(expressions);
+    return result;  
+  }
+console.log(message)   
+  // var  arr = [1, 2, 3, 4, 5];
+  // var sum = arr.reduce(function(prev, cur, index, arr) {
+  //     console.log(prev, cur, index);
+  //     return prev + cur;
+  // })
+  // console.log(arr, sum);
+  // 让多行文本变一行 ,trim  只能去除首尾的空格
+  </script>
+</body>
+</html>
