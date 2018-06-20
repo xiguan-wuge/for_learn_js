@@ -7,19 +7,65 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="box1">点击我得到id</div>
+  <!-- vue 是 MVVM
+  data-binding 
+  template compile -->
+
+  <!-- 支持对{{}}解析，模板的编译 template compile
+  template -> html 
+  {{key}} 在data{name:'张三'} 回填
+  1. 打坑
+  2. 填值 -->
+
+  <div id="app">
+    <h3>姓名</h3>
+    <p>我的名字 {{name}}</p>
+    <h3>年龄</h3>
+    <p>{{age}}</p>
+    <div class="msg">
+      <p>{{msg}}</p>
+    </div>
+  </div>
   <script>
-  document.getElementById('box1').onclick=function(){
-    var func=function(){
-      alert(this.id);
+  class Vue{
+    constructor(opt){
+      this.opt=opt;
+      this.root=document.querySelector(opt.el);
+      // console.log(this.root)
+      this.compile(this.root);
     }
-    // alert(this.id);
-    func();
-    // 普通函数，this指向全局
-    func.call(this);
-    // (这里的this指向document.getElementById('box1'))
+    compile(node){
+    //{{.*}}
+    // 遍历节点，文本节点
+    console.log(node.childNodes);
+      [].forEach.call(node.childNodes,child=>{
+        // 只有{{}}才需要去做，正则
+        // 子节点下面还有没有孙节点，第一个子节点
+        if(! child.firstElementChild && /\{\{(.*)\}\}/.test(child.innerHTML)){
+          // console.log(RegExp.$1,RegExp.$2,RegExp.$3)
+          let key=RegExp.$1.trim();
+          child.innerHTML=child.innerHTML.replace(/\{\{(.*)(\})\}/,this.opt.data[key]);
+        }else if(child.firstElementChild){
+          this.compile(child);
+        }
+      })
+    }
   }
+  document.addEventListener('DOMContentLoaded',function(){
+    // 快一点，
+    // el-> element(哪个节点（根节点）)
+    let options={
+      el:'#app',
+      data:{
+        name:'检索中···',
+        age:30,
+        msg:'vue 高手，月薪5万'
+      }
+    }
+    new Vue(options)
+  });
+  
+  
   </script>
-  <script src="call_apply.js"></script>
 </body>
 </html>
