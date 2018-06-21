@@ -1,5 +1,6 @@
-数组去重事常考的js 基础题
-七种方法
-  时间复杂度是一个函数，定性描述了算法的运行时间，
-  打O表示
-  双重循环里O(n^2) 吃内存
+手写promise
+ promise 类
+构造函数的参数 fn 
+有一个方法 then
+node commonJS
+Promise 作为模板 return
