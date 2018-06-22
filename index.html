@@ -4,68 +4,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>ajax</title>
+  <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
-  <!-- vue 是 MVVM
-  data-binding 
-  template compile -->
-
-  <!-- 支持对{{}}解析，模板的编译 template compile
-  template -> html 
-  {{key}} 在data{name:'张三'} 回填
-  1. 打坑
-  2. 填值 -->
-
-  <div id="app">
-    <h3>姓名</h3>
-    <p>我的名字 {{name}}</p>
-    <h3>年龄</h3>
-    <p>{{age}}</p>
-    <div class="msg">
-      <p>{{msg}}</p>
-    </div>
+  <div class="info-box">
+    <p class="username"></p>
+    <p class="desc"></p>
   </div>
   <script>
-  class Vue{
-    constructor(opt){
-      this.opt=opt;
-      this.root=document.querySelector(opt.el);
-      // console.log(this.root)
-      this.compile(this.root);
+    // fecth（promise封装后的api）函数执行 返回的是文件流，再转换成json格式
+    // fetch('/user.json')
+    // .then(data=>data.json())
+    // .then(data=>{
+    //   console.log(data);
+    // });
+
+    //ajax 获取数据
+    // $(function(){
+    //   $.ajax({
+    //     type:"get",
+    //     url:"/user.json",
+    //     dataType:"json",
+    //     success:function(result){
+    //       console.log(result)
+    //页面输出
+    //       $('.username').html(result.name);
+    //       $('.desc').html(result.desc);
+
+    //     }
+    //   });
+    // });
+    
+    // xhr(XMLHttpRequest) ajax异步请求数据的核心
+    // js 主动请求数据的过程
+    // ajax 是js 具有web2.0 动态请求页面的能力
+    let xhr =null;
+    // js 主动发出一次http请求request，支持的数据交换格式xml
+    // 浏览器嗅探
+    if(window.XMLHttpRequest){
+      xhr=new XMLHttpRequest();
+    }else{
+      xhr=new ActiveXObject('Microsoft.XMLHTTP');
     }
-    compile(node){
-    //{{.*}}
-    // 遍历节点，文本节点
-    console.log(node.childNodes);
-      [].forEach.call(node.childNodes,child=>{
-        // 只有{{}}才需要去做，正则
-        // 子节点下面还有没有孙节点，第一个子节点
-        if(! child.firstElementChild && /\{\{(.*)\}\}/.test(child.innerHTML)){
-          // console.log(RegExp.$1,RegExp.$2,RegExp.$3)
-          let key=RegExp.$1.trim();
-          child.innerHTML=child.innerHTML.replace(/\{\{(.*)(\})\}/,this.opt.data[key]);
-        }else if(child.firstElementChild){
-          this.compile(child);
-        }
-      })
-    }
-  }
-  document.addEventListener('DOMContentLoaded',function(){
-    // 快一点，
-    // el-> element(哪个节点（根节点）)
-    let options={
-      el:'#app',
-      data:{
-        name:'检索中···',
-        age:30,
-        msg:'vue 高手，月薪5万'
+    // get 明文请求
+    // 建立连接
+    xhr.open('get','/user.json',true);
+    // false | true  异步请求
+    // true  同步
+    // false 异步
+    // 发送
+    xhr.send();
+    // 响应
+    // 一旦发送之后，状态码会发生改变
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState==4 && xhr.status==200){
+        // 200  http 状态码，表示成功响应
+        // 了解readyState的几种状态码
+        console.log(xhr.responseText)
+        const zk=JSON.parse(xhr.responseText)
+        console.log(zk.name)
+        
       }
     }
-    new Vue(options)
-  });
-  
-  
   </script>
 </body>
 </html>
