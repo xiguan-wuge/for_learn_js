@@ -1,15 +1,15 @@
 性能优化
 
-http createServer (req res) =>(callback)
+http createServer (req res) =>(callback) 返回一个回调函数
 
-web 一切皆资源
+web 一切皆资源 (加载  挂载)
 
 web server 资源（html,css json , img） createReadStream（读）
 “传输”到客户端 client proxy(用户代理)
 
 优化空间？
 核心 文件（资源）
-传输的体积能够减少 =》压缩 gzip
+传输的体积能够减少 =》压缩 gzip 减少加载时间
 在服务器端是可以进行文件操作的 读写 权限 压缩 解压缩
 客户端 browser
 
