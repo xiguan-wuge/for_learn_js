@@ -2,7 +2,10 @@ const http = require('http');
 const fs = require('fs');
 const zlib = require('zlib');
 
-const server = http.createServer((req, res)=> {
+
+
+
+const server = http.createServer((req, res) => {
   // 浏览器能支持自动解压ungzip？ 
   // console.log(req.headers.['accept-encoding']);
   if (req.headers['accept-encoding'].indexOf('gzip') != -1) {
