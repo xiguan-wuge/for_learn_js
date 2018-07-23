@@ -6,7 +6,7 @@ Function.prototype.bind2 = function(context) {
     var bindArgs = Array.prototype.slice.call(arguments);
     self.apply(this instanceof self ? this : context, args.concat(bindArgs)) // this instanceof self  判断是不是self的实例
   }
-  FNOP.prototype = this.prototype;
+  FNOP.prototype = this.prototype;        
   bound.prototype = new FNOP();
   return bound
 }
